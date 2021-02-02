@@ -1,0 +1,4 @@
+include ':common'
+include ':FoxDevFrame-Kotlin'
+include ':app'
+rootProject.name = "FenceRecorder-Kotlin"

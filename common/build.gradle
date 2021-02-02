@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+def _versionCode = rootProject.ext.android.versionCode
+def _versionName = rootProject.ext.android.versionName
+def _compileSdkVersion = rootProject.ext.android.compileSdkVersion
+def _buildToolsVersion = rootProject.ext.android.buildToolsVersion
+def _minSdkVersion = rootProject.ext.android.minSdkVersion
+def _targetSdkVersion = rootProject.ext.android.targetSdkVersion
+
+android {
+    compileSdkVersion _compileSdkVersion
+    buildToolsVersion _buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion _minSdkVersion
+        targetSdkVersion _targetSdkVersion
+        versionCode _versionCode
+        versionName _versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BUGLY_KEY", "\"${BUGLY_KEY}\"")
+            buildConfigField("String", "BUGLY_ID", "\"${BUGLY_ID}\"")
+            buildConfigField("boolean", "DEBUG_MODE", "false")
+        }
+        debug {
+            buildConfigField("String", "BUGLY_KEY", "\"${BUGLY_KEY}\"")
+            buildConfigField("String", "BUGLY_ID", "\"${BUGLY_ID}\"")
+            buildConfigField("boolean", "DEBUG_MODE", "true")
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    api project(path: ':FoxDevFrame-Kotlin')
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Bugly
+//    api rootProject.ext.dependencies.bugly_crashreport
+//    api rootProject.ext.dependencies.bugly_native_crashreport
+}
