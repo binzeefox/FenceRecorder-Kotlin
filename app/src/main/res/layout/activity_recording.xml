@@ -13,11 +13,12 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:background="@drawable/bg_red_to_blue_horizontal"
-        android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="1dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="0dp" />
@@ -47,7 +48,7 @@
                 android:orientation="horizontal"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/red_side_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -59,7 +60,9 @@
                     android:paddingTop="24dp"
                     android:paddingBottom="24dp"
                     android:selectAllOnFocus="true"
-                    android:text="红方"
+                    android:hint="红方"
+                    android:popupBackground="@android:color/white"
+                    android:completionThreshold="0"
                     android:textSize="21sp"
                     tools:textColor="@android:color/white" />
 
@@ -72,7 +75,7 @@
                     android:text="@string/vs"
                     android:textSize="21sp" />
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/blue_side_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -86,7 +89,9 @@
                     android:paddingBottom="24dp"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
-                    android:text="蓝方"
+                    android:hint="蓝方"
+                    android:popupBackground="@android:color/white"
+                    android:completionThreshold="0"
                     android:textSize="21sp"
                     tools:textColor="@android:color/white" />
             </LinearLayout>

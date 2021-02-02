@@ -7,10 +7,11 @@ import android.os.Vibrator
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.text.isDigitsOnly
 import com.binzeefox.foxdevframe_kotlin.FoxCore
@@ -40,9 +41,9 @@ class RecordingActivity: BaseActivity() {
     // 计时区
     private val timerField: TextView? get() = findViewById(R.id.timer_field)
     // 红方名称
-    private val redNameField: EditText? get() = findViewById(R.id.red_side_field)
+    private val redNameField: AppCompatAutoCompleteTextView? get() = findViewById(R.id.red_side_field)
     // 蓝方名称
-    private val blueNameField: EditText? get() = findViewById(R.id.blue_side_field)
+    private val blueNameField: AppCompatAutoCompleteTextView? get() = findViewById(R.id.blue_side_field)
     // 红方分数
     private val redScoreField: TextView? get() = findViewById(R.id.red_score_field)
     // 蓝方分数
@@ -71,11 +72,22 @@ class RecordingActivity: BaseActivity() {
         fun onBackPressed()
     }
 
+    override fun getContentViewResource(): Int = R.layout.activity_recording
+
     override fun onCreate() {
         super.onCreate()
         findViewById<Toolbar>(R.id.toolbar)?.apply {
             setSupportActionBar(this)
             this@RecordingActivity.title = ""
+        }
+
+        ThreadUtils.executeIO {
+            val list = getNameList()
+            arrayOf(redNameField, blueNameField).forEach {
+                runOnUiThread {
+                    it?.setAdapter(ArrayAdapter(this, android.R.layout.simple_list_item_1, list))
+                }
+            }
         }
 
         fabIcon?.setOnClickListener { state.onPressAction() }
@@ -123,13 +135,13 @@ class RecordingActivity: BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.about -> {
-                if (state is RecordingState) {
+                if (state !is RecordingState) {
                     AlertDialog.Builder(this)
                         .setTitle("使用说明")
                         .setCancelable(true)
                         .setMessage(getIntro())
                         .show()
-                }
+                } else NoticeUtil.toast("计时状态屏蔽按键").showNow()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -140,12 +152,11 @@ class RecordingActivity: BaseActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
         menu?.findItem(R.id.match_settings)?.isVisible = false
         menu?.findItem(R.id.member_settings)?.isVisible = false
+        menu?.findItem(R.id.about)?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         return true
     }
 
     override fun onBackPressed() = state.onBackPressed()
-
-    override fun getContentViewResource(): Int = R.layout.activity_recording
 
     ///////////////////////////////////////////////////////////////////////////
     // 私有方法
@@ -181,6 +192,9 @@ class RecordingActivity: BaseActivity() {
     private fun longToTimeString(time: Long) =
         SimpleDateFormat("mm:ss", Locale.getDefault()).format(time)
 
+    private fun getNameList(): List<String> {
+        return FoxCore.database.memberDao().queryNickNames()
+    }
 
     /**
      * 通过时间字符串获取Long

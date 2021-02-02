@@ -1,6 +1,12 @@
 package com.cloud_hermits.fencerecorder.db.tables
 
 import androidx.room.*
+import java.util.*
+
+const val GENDER_MALE = 1   // 性别男
+const val GENDER_FEMALE = 0 // 性别女
+const val GENDER_UNKNOWN = 9    // 未知性别
+const val GENDER_OTHER = 8  // 其它性别
 
 /**
  * 对抗者
@@ -10,10 +16,11 @@ import androidx.room.*
  */
 @Entity(indices = [Index(value = ["nickname"], unique = true)])
 data class Member(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
 
     // 名称ID 唯一
     var nickname: String,
+    var gender: Int,
     // 生日
     var birthday: Long,
     // 入库时间
@@ -30,8 +37,26 @@ data class Member(
 @Dao
 interface MemberDao {
 
+    /**
+     * 通过昵称获取比赛场次ID
+     */
+    @Query("SELECT id FROM `match` WHERE redName = :nickname OR blueName = :nickname")
+    fun queryTotalMatch(nickname: String): List<Long>
+
+    /**
+     * 通过昵称获取胜场ID
+     */
+    @Query("SELECT id From `match` WHERE (redName = :nickname AND redScore > blueScore) OR (blueName = :nickname AND blueScore > redScore)")
+    fun queryWinByMember(nickname: String): List<Long>
+
+    /**
+     * 通过昵称获取败场ID
+     */
+    @Query("SELECT id From `match` WHERE (redName = :nickname AND redScore <= blueScore) OR (blueName = :nickname AND blueScore <= redScore)")
+    fun queryLoseByMember(nickname: String): List<Long>
+
     @Query("SELECT * FROM `Member` WHERE id = :id")
-    fun query(id: Int): Member
+    fun query(id: Long): Member
 
     /**
      * 获取全部nickname
@@ -79,12 +104,14 @@ interface MemberDao {
 data class MemberCondition(
     // 名称ID 唯一
     var nickname: String,
+    // 性别
+    var gender: Int = GENDER_UNKNOWN,
     // 生日
     var birthday: Long,
     // 入库时间
-    var dbTimestamp: Long,
+    var dbTimestamp: Long = Date().time,
     // 关联场次id
 //    var matches: List<Long> = emptyList(),
     // 备注
-    val comment: String?
+    var comment: String?
 )

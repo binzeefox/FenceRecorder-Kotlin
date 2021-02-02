@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_red_to_blue_horizontal"
+        android:layout_marginBottom="16dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/nickname_field"
+        android:hint="昵称"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/birthday_field"
+        android:hint="出生日期"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/gender_field"
+        android:hint="性别"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:hint="备注"
+        android:gravity="top|start"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="128dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin2"
+        app:fabCustomSize="55dp"
+        app:srcCompat="@drawable/ic_add_24dp" />
+</LinearLayout>

@@ -74,7 +74,8 @@ class MatchListActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.member_settings -> {   // 人员设置
-                TODO("跳转至人员设置页")
+                Launcher(this).getActivityTarget(MemberConfigActivity::class.java).commit()
+                true
             }
             R.id.match_settings -> {   // 比赛设置
                 Launcher(this).getActivityTarget(MatchConfigActivity::class.java).commit()
@@ -204,7 +205,7 @@ class MatchListActivity : BaseActivity() {
                 Locale.CHINA, "%s vs %s 比分 %d : %d",
                 match.redName, match.blueName, match.redScore, match.blueScore
             )
-            val date = SimpleDateFormat("yyyy-MM-dd HH:mmss", Locale.CHINA)
+            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                 .format(Date(match.timestamp))
 
             text1.text = title

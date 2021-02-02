@@ -11,7 +11,7 @@ import java.util.*
  */
 @Entity(indices = [Index(value = ["timestamp"], unique = true)])
 data class Match(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
 
     // 时间戳 唯一
     var timestamp: Long = Date().time,
@@ -36,31 +36,13 @@ data class Match(
 interface MatchDao {
 
     @Query("SELECT * FROM `Match` WHERE id = :id")
-    fun query(id: Int): Match
+    fun query(id: Long): Match
 
     /**
      * 获取全部
      */
     @Query("SELECT * FROM `match`")
     fun getAll(): List<Match>
-
-    /**
-     * 通过昵称获取比赛场次
-     */
-    @Query("SELECT * FROM `match` WHERE redName = :nickname OR blueName = :nickname")
-    fun queryByMember(nickname: String): List<Match>
-
-    /**
-     * 通过昵称获取胜场
-     */
-    @Query("SELECT * From `match` WHERE (redName = :nickname AND redScore > blueScore) OR (blueName = :nickname AND blueScore > redScore)")
-    fun queryWinByMember(nickname: String): List<Match>
-
-    /**
-     * 通过昵称获取败场
-     */
-    @Query("SELECT * From `match` WHERE (redName = :nickname AND redScore <= blueScore) OR (blueName = :nickname AND blueScore <= redScore)")
-    fun queryLoseByMember(nickname: String): List<Match>
 
     /**
      * 搜索时间范围内的全部值

@@ -25,7 +25,7 @@ android {
 
     defaultConfig {
         applicationId "com.cloud_hermits.fencerecorder"
-        minSdkVersion _minSdkVersion
+        minSdkVersion 24
         targetSdkVersion _targetSdkVersion
         versionCode _versionCode
         versionName _versionName
