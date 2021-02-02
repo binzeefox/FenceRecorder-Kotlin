@@ -211,8 +211,12 @@ class RecordingActivity: BaseActivity() {
      */
     private fun localizeAndFinish() {
         ThreadUtils.executeIO {
+            var period: Long = 0
+            timer?.let {
+                period = it.maxTime - it.remainTime
+            }
             MatchCondition(
-                period = timer?.maxTime?:MatchConfig.matchPeriod,
+                period = period,
                 redName = redPlayer.nickname,
                 blueName = bluePlayer.nickname,
                 redScore = redPlayer.score,
