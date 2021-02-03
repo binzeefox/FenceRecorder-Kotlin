@@ -240,7 +240,7 @@ class RecordingActivity: BaseActivity() {
      */
     private fun getIntro(): String {
         return """
-             1. 输入双方选手姓名
+             1. 输入双方选手姓名，会根据保存的成员信息进行提示
              2. （若需要）点击比赛时长修改比赛时长
              3. 点击开始按钮进行计时
              4. 若出现得分，暂停计时并修改分数

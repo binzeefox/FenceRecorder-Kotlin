@@ -75,7 +75,7 @@ interface ILauncherTarget {
      *
      * @param interceptor 拦截器
      */
-    fun intentInterceptor(interceptor: IntentInterceptor): ILauncherTarget?
+    fun intentInterceptor(interceptor: IntentInterceptor): ILauncherTarget
 
     /**
      * 开始跳转
@@ -85,7 +85,7 @@ interface ILauncherTarget {
     /**
      * 拦截器
      */
-    interface IntentInterceptor {
+    fun interface IntentInterceptor {
         /**
          * 拦截回调，返回的Intent将用于跳转
          *

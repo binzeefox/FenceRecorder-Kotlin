@@ -53,6 +53,7 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".cat.MemberConfigActivity" />
         <activity android:name=".cat.AddMemberActivity" />
+        <activity android:name=".cat.MemberActivity" />
     </application>
 
 </manifest>

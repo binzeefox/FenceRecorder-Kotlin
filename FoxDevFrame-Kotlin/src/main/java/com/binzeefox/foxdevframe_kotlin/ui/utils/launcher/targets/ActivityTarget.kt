@@ -18,13 +18,13 @@ class ActivityTarget(
         private val options: Bundle?
 ): ILauncherTarget {
 
-    override fun intentInterceptor(interceptor: ILauncherTarget.IntentInterceptor): ILauncherTarget? {
+    override fun intentInterceptor(interceptor: ILauncherTarget.IntentInterceptor): ILauncherTarget {
         intent = interceptor.onIntercept(intent)
         return this
     }
 
     override fun commit() {
-        if (ctx is Application) intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (ctx is Application) intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         ctx.startActivity(intent, options)
     }
 }

@@ -100,6 +100,7 @@ class MemberConfigActivity : BaseActivity() {
             holder.apply {
                 renderPool.execute {
                     val member = memberList[position]
+                    val id = member.id
                     val name = member.nickname
                     val gender = genderMap[member.gender]
                     val total = FoxCore.database.memberDao().queryTotalMatch(name).size
@@ -110,7 +111,7 @@ class MemberConfigActivity : BaseActivity() {
                         totalCountField?.text = "总场次: $total"
                         winCountField?.text = "获胜场次: $win"
                         itemView.setOnClickListener {
-//                            TODO("卡片点击事件")
+                            MemberActivity.launch(this@MemberConfigActivity, id)
                         }
                     }
                 }
