@@ -13,7 +13,7 @@ import com.cloud_hermits.fencerecorder.db.tables.MemberDao
  * @author tong.xw
  * 2021/02/01 11:25
  */
-@Database(entities = [Match::class, Member::class], version = 2, exportSchema = false)
+@Database(entities = [Match::class, Member::class], version = 3, exportSchema = false)
 abstract class FenceRecorderDB: RoomDatabase() {
     abstract fun matchDao(): MatchDao
     abstract fun memberDao(): MemberDao

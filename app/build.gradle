@@ -50,12 +50,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             android.applicationVariants.all { variant ->
+                def buildType = variant.buildType.name
                 variant.outputs.all { output ->
                     def releaseTime = new Date().format("yyyy-MM-dd_HH_mm") //打包时间
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // 修改APK名
-                        def fileName = "FenceRecorder-v${_versionName}-${releaseTime}.apk"
+                        def fileName = "FenceRecorder-${buildType}-v${_versionName}-${releaseTime}.apk"
                         outputFileName = fileName
                     }
                 }
@@ -63,12 +64,13 @@ android {
         }
         debug {
             android.applicationVariants.all { variant ->
+                def buildType = variant.buildType.name
                 variant.outputs.all { output ->
                     def releaseTime = new Date().format("yyyy-MM-dd_HH_mm") //打包时间
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // 修改APK名
-                        def fileName = "FenceRecorder-DEBUG-v${_versionName}-${releaseTime}.apk"
+                        def fileName = "FenceRecorder-${buildType}-v${_versionName}-${releaseTime}.apk"
                         outputFileName = fileName
                     }
                 }
