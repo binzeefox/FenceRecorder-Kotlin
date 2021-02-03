@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
+        android:id="@+id/comment_field"
         android:hint="备注"
         android:gravity="top|start"
         android:layout_marginHorizontal="16dp"

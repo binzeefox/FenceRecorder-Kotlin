@@ -13,13 +13,18 @@ import androidx.appcompat.widget.Toolbar
 import com.binzeefox.foxdevframe_kotlin.FoxCore
 import com.binzeefox.foxdevframe_kotlin.ui.utils.NoticeUtil
 import com.binzeefox.foxdevframe_kotlin.ui.utils.ViewUtil
+import com.binzeefox.foxdevframe_kotlin.utils.LogUtil
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
 import com.cloud_hermits.fencerecorder.MyApplication.Companion.clearTables
 import com.cloud_hermits.fencerecorder.R
+import com.cloud_hermits.fencerecorder.utils.JxlUtils
 import com.tencent.bugly.beta.Beta
+import org.w3c.dom.Text
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.exp
 
 /**
  * 比赛设置Activity
@@ -28,6 +33,7 @@ import java.util.*
  * 2021/02/01 18:03
  */
 class MatchConfigActivity : BaseActivity() {
+    private val exportHint = "*导出内容位于${JxlUtils.cacheDir.absolutePath}"
 
     override fun getContentViewResource(): Int = R.layout.activity_match_config
 
@@ -39,6 +45,8 @@ class MatchConfigActivity : BaseActivity() {
             this@MatchConfigActivity.title = "比赛设置"
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+
+        findViewById<TextView>(R.id.tv_export_hint)?.text = exportHint
 
         ViewUtil(findViewById(R.id.clear_data))
             .setOnDeBounceClickListener(500) {
@@ -60,6 +68,42 @@ class MatchConfigActivity : BaseActivity() {
         ViewUtil(findViewById(R.id.btn_update))
             .setOnDeBounceClickListener(500) {
                 Beta.checkUpgrade(true, false)  //检查更新
+            }
+
+        // 导出人员表
+        ViewUtil(findViewById(R.id.btn_export_members))
+            .setOnDeBounceClickListener(500) {
+                ThreadUtils.executeIO {
+                    try {
+                        JxlUtils.exportMemberExcel()
+                        runOnUiThread {
+                            NoticeUtil.toast("导出成功").showNow()
+                        }
+                    } catch (e: Exception) {
+                        LogUtil(javaClass.name).setMessage("导出人员表失败").setThrowable(e).e()
+                        runOnUiThread {
+                            NoticeUtil.toast("导出失败").showNow()
+                        }
+                    }
+                }
+            }
+
+        // 导出总表
+        ViewUtil(findViewById(R.id.btn_export_all))
+            .setOnDeBounceClickListener(500) {
+                ThreadUtils.executeIO {
+                    try {
+                        JxlUtils.exportFullExcel()
+                        runOnUiThread {
+                            NoticeUtil.toast("导出成功").showNow()
+                        }
+                    } catch (e: Exception) {
+                        LogUtil(javaClass.name).setMessage("导出总表失败").setThrowable(e).e()
+                        runOnUiThread {
+                            NoticeUtil.toast("导出失败").showNow()
+                        }
+                    }
+                }
             }
 
         val period = MatchConfig.matchPeriod

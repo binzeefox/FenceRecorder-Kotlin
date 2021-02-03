@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -68,20 +69,49 @@
             </LinearLayout>
         </TableRow>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_export_all"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:text="导出总表"/>
+
+        <Button
+            android:id="@+id/btn_export_members"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:text="导出人员表"/>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            tools:text="*导出内容位于xxxx/xxx/xx/xxxxxx/xx"
+            android:id="@+id/tv_export_hint"
+            android:layout_width="match_parent"/>
+
+        <View
+            android:background="#5e5e5e"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"/>
+
         <Button
             android:id="@+id/btn_update"
+            android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/colorPrimary"
-            android:textColor="@android:color/primary_text_dark"
-            android:layout_width="match_parent"
-            android:text="检查更新" />
+            android:text="检查更新"
+            android:textColor="@android:color/primary_text_dark" />
 
         <Button
             android:id="@+id/clear_data"
+            android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/colorAccent"
-            android:textColor="@android:color/primary_text_dark"
-            android:layout_width="match_parent"
-            android:text="清除数据" />
+            android:text="清除数据"
+            android:textColor="@android:color/primary_text_dark" />
     </TableLayout>
 </LinearLayout>
