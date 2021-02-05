@@ -1,6 +1,7 @@
 package com.cloud_hermits.fencerecorder
 
 import androidx.room.Room
+import androidx.room.migration.Migration
 import com.binzeefox.foxdevframe_kotlin.FoxCore
 import com.cloud_hermits.common.BaseApplication
 import com.cloud_hermits.common.BuildConfig
@@ -21,7 +22,8 @@ class MyApplication : BaseApplication() {
          * 数据库, 拓展到FoxCore
          */
         val FoxCore.database: FenceRecorderDB by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            Room.databaseBuilder(FoxCore.appContext, FenceRecorderDB::class.java, DB_NAME).build()
+            Room.databaseBuilder(FoxCore.appContext, FenceRecorderDB::class.java, DB_NAME)
+                .build()
         }
 
         /**

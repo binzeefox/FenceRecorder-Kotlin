@@ -21,7 +21,7 @@ import java.util.*
 object JxlUtils {
 
     // 缓存文件夹
-    val cacheDir = File(FoxCore.appContext.externalCacheDir, "excels").apply {
+    val fileDir = File(FoxCore.appContext.getExternalFilesDir(null), "excels").apply {
         if (!exists()) mkdir()
         if (!isDirectory) {
             delete()
@@ -37,7 +37,7 @@ object JxlUtils {
      * 导出全部数据
      */
     fun exportFullExcel() {
-        val excel = File(cacheDir, "兵击计分器记录_${currentTimeForFile}.xls").apply {
+        val excel = File(fileDir, "兵击计分器记录_${currentTimeForFile}.xls").apply {
             if (exists()) delete()
             createNewFile()
         }
@@ -60,7 +60,7 @@ object JxlUtils {
      * 导出Excel
      */
     fun exportMatchExcel() {
-        val excel = File(cacheDir, "对战记录_${currentTimeForFile}.xls").apply {
+        val excel = File(fileDir, "对战记录_${currentTimeForFile}.xls").apply {
             if (exists()) delete()
             createNewFile()
         }
@@ -78,7 +78,7 @@ object JxlUtils {
      * 导出人员表
      */
     fun exportMemberExcel() {
-        val excel = File(cacheDir, "人员表_${currentTimeForFile}.xls").apply {
+        val excel = File(fileDir, "人员表_${currentTimeForFile}.xls").apply {
             if (exists()) delete()
             createNewFile()
         }
@@ -104,7 +104,7 @@ object JxlUtils {
             "人员对战记录_${currentTimeForFile}.xls"
         }
 
-        val excel = File(cacheDir, fileName).apply {
+        val excel = File(fileDir, fileName).apply {
             if (exists()) delete()
             createNewFile()
         }

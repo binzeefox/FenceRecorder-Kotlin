@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import com.binzeefox.foxdevframe_kotlin.FoxCore
 import com.binzeefox.foxdevframe_kotlin.ui.utils.NoticeUtil
+import com.binzeefox.foxdevframe_kotlin.utils.LogUtil
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
 import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
@@ -83,17 +84,22 @@ class AddMemberActivity : BaseActivity() {
             condition.comment = commentField?.text.toString()
             condition.nickname = nicknameField?.text.toString()
             nicknameField?.run {
-                if (text.isNullOrBlank()) error = "昵称不能为空"
-                return@setOnClickListener
+                if (text.isNullOrBlank()) {
+                    error = "昵称不能为空"
+                    return@setOnClickListener
+                }
             }
             birthdayField?.run {
-                if (text.isNullOrBlank()) error = "出生日期用来计算年龄，请选择"
-                return@setOnClickListener
+                if (text.isNullOrBlank()) {
+                    error = "出生日期用来计算年龄，请选择"
+                    return@setOnClickListener
+                }
             }
             ThreadUtils.executeIO {
                 try {
                     FoxCore.database.memberDao().insert(condition)
                 } catch (e: SQLiteConstraintException) {
+                    LogUtil(AddMemberActivity::class.java.simpleName).setThrowable(e).e()
                     runOnUiThread {
                         nicknameField?.error = "昵称冲突，请尝试其它昵称"
                     }

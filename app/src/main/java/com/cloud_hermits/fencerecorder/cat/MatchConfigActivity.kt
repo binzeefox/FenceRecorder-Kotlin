@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -20,11 +19,9 @@ import com.cloud_hermits.fencerecorder.MyApplication.Companion.clearTables
 import com.cloud_hermits.fencerecorder.R
 import com.cloud_hermits.fencerecorder.utils.JxlUtils
 import com.tencent.bugly.beta.Beta
-import org.w3c.dom.Text
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.exp
 
 /**
  * 比赛设置Activity
@@ -33,7 +30,7 @@ import kotlin.math.exp
  * 2021/02/01 18:03
  */
 class MatchConfigActivity : BaseActivity() {
-    private val exportHint = "*导出内容位于${JxlUtils.cacheDir.absolutePath}"
+    private val exportHint = "*导出内容位于${JxlUtils.fileDir.absolutePath}"
 
     override fun getContentViewResource(): Int = R.layout.activity_match_config
 
