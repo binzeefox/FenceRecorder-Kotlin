@@ -40,8 +40,8 @@ interface MemberDao {
     /**
      * 通过昵称获取比赛场次ID
      */
-    @Query("SELECT id FROM `match` WHERE redName = :nickname OR blueName = :nickname")
-    fun queryTotalMatch(nickname: String): List<Long>
+    @Query("SELECT * FROM `match` WHERE redName = :nickname OR blueName = :nickname")
+    fun queryTotalMatch(nickname: String): List<Match>
 
     /**
      * 通过昵称获取胜场ID

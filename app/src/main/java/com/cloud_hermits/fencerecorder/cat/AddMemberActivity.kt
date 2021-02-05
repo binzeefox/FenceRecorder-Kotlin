@@ -13,7 +13,7 @@ import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
 import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
-import com.cloud_hermits.fencerecorder.db.tables.MemberCondition
+import com.cloud_hermits.fencerecorder.db.tables.*
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,10 +26,10 @@ import java.util.*
  */
 class AddMemberActivity : BaseActivity() {
     private val genderMap: Map<String, Int> = mapOf(
-        Pair("女", 0),
-        Pair("男", 1),
-        Pair("未知", 9),
-        Pair("其它", 8)
+        Pair("女", GENDER_FEMALE),
+        Pair("男", GENDER_MALE),
+        Pair("未知", GENDER_UNKNOWN),
+        Pair("其它", GENDER_OTHER)
     )
     private val nicknameField: TextInputEditText? get() = findViewById(R.id.nickname_field)
     private val birthdayField: TextInputEditText? get() = findViewById(R.id.birthday_field)

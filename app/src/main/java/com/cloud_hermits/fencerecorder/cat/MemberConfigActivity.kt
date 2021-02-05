@@ -13,7 +13,7 @@ import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
 import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
-import com.cloud_hermits.fencerecorder.db.tables.Member
+import com.cloud_hermits.fencerecorder.db.tables.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -27,11 +27,11 @@ class MemberConfigActivity : BaseActivity() {
     private val memberListView: RecyclerView? get() = findViewById(R.id.list_member)
     private val memberList: ArrayList<Member> = ArrayList()
     private val listAdapter: ListAdapter by lazy { ListAdapter() }
-    private val genderMap: Map<Int, String> = mapOf(
-        Pair(0, "女"),
-        Pair(1, "男"),
-        Pair(9, "未知"),
-        Pair(8, "其它")
+    private  val genderMap: Map<Int, String> = mapOf(
+        Pair(GENDER_FEMALE, "女"),
+        Pair(GENDER_MALE, "男"),
+        Pair(GENDER_UNKNOWN, "未知"),
+        Pair(GENDER_OTHER, "其它")
     )
 
     override fun getContentViewResource(): Int = R.layout.activity_member_config
@@ -111,7 +111,7 @@ class MemberConfigActivity : BaseActivity() {
                         totalCountField?.text = "总场次: $total"
                         winCountField?.text = "获胜场次: $win"
                         itemView.setOnClickListener {
-                            MemberActivity.launch(this@MemberConfigActivity, id)
+                            MemberDetailActivity.launch(this@MemberConfigActivity, id)
                         }
                     }
                 }

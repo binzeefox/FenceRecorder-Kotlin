@@ -2,8 +2,7 @@ package com.cloud_hermits.fencerecorder.utils
 
 import com.binzeefox.foxdevframe_kotlin.FoxCore
 import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
-import com.cloud_hermits.fencerecorder.db.tables.Match
-import com.cloud_hermits.fencerecorder.db.tables.Member
+import com.cloud_hermits.fencerecorder.db.tables.*
 import jxl.Workbook
 import jxl.write.Label
 import jxl.write.WritableSheet
@@ -258,10 +257,10 @@ object JxlUtils {
         sheet: WritableSheet
     ) {
         val genderMap: Map<Int, String> = mapOf(
-            Pair(0, "女"),
-            Pair(1, "男"),
-            Pair(9, "未知"),
-            Pair(8, "其它")
+            Pair(GENDER_FEMALE, "女"),
+            Pair(GENDER_MALE, "男"),
+            Pair(GENDER_UNKNOWN, "未知"),
+            Pair(GENDER_OTHER, "其它")
         )
         val dbDate =
             SimpleDateFormat("yyyy年MM月dd日\nHH:mm:ss", Locale.CHINA).format(member.dbTimestamp)

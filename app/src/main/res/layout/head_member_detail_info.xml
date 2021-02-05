@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <TextView
+        android:id="@+id/nickname_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        tools:text="狐彻" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/total_count_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="总场次：1" />
+
+        <TextView
+            android:id="@+id/win_count_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="获胜场次：1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/gender_field"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="性别：男" />
+
+        <TextView
+            android:id="@+id/birthday_field"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="生日：yyyy年MM月dd日" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/db_date_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        tools:text="入库日期：yyyy年MM月dd日  HH：mm：hh" />
+
+    <TextView
+        android:id="@+id/comment_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        tools:text="备注：狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁" />
+</LinearLayout>
