@@ -7,7 +7,7 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_config_24dp"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/member_settings"

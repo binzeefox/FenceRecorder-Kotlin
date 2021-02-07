@@ -67,7 +67,6 @@ class MemberDetailActivity : BaseActivity() {
 
     override fun onCreate() {
         super.onCreate()
-        setFullScreen()
 
         findViewById<Toolbar>(R.id.toolbar).apply {
             setSupportActionBar(this)

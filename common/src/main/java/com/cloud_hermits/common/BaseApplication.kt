@@ -33,10 +33,4 @@ abstract class BaseApplication: Application() {
             database.clearAllTables()
         }
     }
-
-
-    override fun onCreate() {
-        super.onCreate()
-//        Bugly.init(this, BuildConfig.BUGLY_ID, BuildConfig.DEBUG)
-    }
 }

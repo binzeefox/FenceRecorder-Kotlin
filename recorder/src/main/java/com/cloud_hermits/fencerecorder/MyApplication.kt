@@ -5,7 +5,7 @@ import com.cloud_hermits.common.BuildConfig
 import com.tencent.bugly.Bugly
 
 /**
- * App
+ * 计分器App
  *
  * @author tong.xw
  * 2021/02/01 15:13
