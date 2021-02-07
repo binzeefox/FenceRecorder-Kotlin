@@ -172,6 +172,7 @@ object JxlUtils {
         }
         row++
         createMemberRow(row, member, winMatchIdList.size, loseMatchIdList.size, sheet)
+        row++   // 空行
 
         // 胜场
         row++
@@ -185,6 +186,8 @@ object JxlUtils {
             val match = FoxCore.database.matchDao().query(matchId)
             createMatchRow(row, match, sheet)
         }
+        row++   // 空行
+
         // 败场
         row++
         sheet.addCell(Label(0, row, "败场统计"))

@@ -28,7 +28,7 @@ data class Member(
     // 关联场次id   // 不保存场次，直接本地通过昵称查询
 //    var matches: List<Long>,
     // 备注
-    val comment: String?
+    var comment: String?
 )
 
 /**

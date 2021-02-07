@@ -63,5 +63,5 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin2"
         app:fabCustomSize="55dp"
-        app:srcCompat="@drawable/ic_add_24dp" />
+        app:srcCompat="@drawable/ic_baseline_done_24" />
 </LinearLayout>

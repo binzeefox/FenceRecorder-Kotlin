@@ -74,7 +74,7 @@ class MatchListActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.member_settings -> {   // 人员设置
-                Launcher(this).getActivityTarget(MemberConfigActivity::class.java).commit()
+                Launcher(this).getActivityTarget(MemberListActivity::class.java).commit()
                 true
             }
             R.id.match_settings -> {   // 比赛设置

@@ -2,20 +2,21 @@ package com.cloud_hermits.fencerecorder.cat
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import com.binzeefox.foxdevframe_kotlin.FoxCore
 import com.binzeefox.foxdevframe_kotlin.ui.utils.NoticeUtil
 import com.binzeefox.foxdevframe_kotlin.ui.utils.launcher.Launcher
+import com.binzeefox.foxdevframe_kotlin.utils.LogUtil
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
 import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
 import com.cloud_hermits.fencerecorder.db.tables.*
+import com.cloud_hermits.fencerecorder.utils.JxlUtils
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -57,6 +58,7 @@ class MemberDetailActivity : BaseActivity() {
     private val dbDateField: TextView? get() = findViewById(R.id.db_date_field)
     private val commentField: TextView? get() = findViewById(R.id.comment_field)
 
+    private var loaded = false
     private lateinit var member: Member
     private val listAdapter: ListAdapter
             by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { ListAdapter() }
@@ -65,8 +67,8 @@ class MemberDetailActivity : BaseActivity() {
 
     override fun onCreate() {
         super.onCreate()
-
         setFullScreen()
+
         findViewById<Toolbar>(R.id.toolbar).apply {
             setSupportActionBar(this)
             this@MemberDetailActivity.title = "人员详情"
@@ -76,7 +78,48 @@ class MemberDetailActivity : BaseActivity() {
             adapter = listAdapter
             setOnItemClickListener(this@MemberDetailActivity::onItemClick)
         }
+
+        findViewById<View>(R.id.fab_config)?.setOnClickListener {
+            // 跳转修改页
+            MemberConfigActivity.launch(this, member.id)
+            loaded = false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         initData()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_export -> {   // 导出
+                ThreadUtils.executeIO {
+                    var success = false
+                    try {
+                        JxlUtils.exportMemberExcelWithDetail(member)
+                        success = true
+                    } catch (e: Exception) {
+                        LogUtil("MemberDetailActivity").setMessage("onOptionsItemSelected: ")
+                            .setThrowable(e).e()
+                    } finally {
+                        runOnUiThread {
+                            if (success)
+                                NoticeUtil.toast("导出成功").showNow()
+                            else
+                                NoticeUtil.toast("导出失败").showNow()
+                        }
+                    }
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_single_export, menu)
+        return true
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -87,6 +130,7 @@ class MemberDetailActivity : BaseActivity() {
      * 初始化Member
      */
     private fun initData() {
+        if (loaded) return
         intent.getLongExtra(PARAMS_MEMBER_ID, -1L).let {
             if (it == -1L) {
                 finish()
@@ -108,7 +152,7 @@ class MemberDetailActivity : BaseActivity() {
                         addAll(memberDao.queryTotalMatch(member.nickname))
                     }
                     data.nickname = member.nickname
-                    data.winCount = memberDao.queryLoseByMember(member.nickname).size
+                    data.winCount = memberDao.queryWinByMember(member.nickname).size
                     data.totalCount = data.matchList.size
                     data.gender = genderMap[member.gender] ?: "未知"
                     data.birthday = SimpleDateFormat("生日：yyyy年MM月dd日", Locale.CHINA)
@@ -117,7 +161,10 @@ class MemberDetailActivity : BaseActivity() {
                         .format(member.dbTimestamp)
                     data.comment = "备注：${member.comment}"
                     // 初始化列表
-                    runOnUiThread { listAdapter.notifyDataSetChanged() }
+                    runOnUiThread {
+                        listAdapter.notifyDataSetChanged()
+                        loaded = true
+                    }
                 }
             }
         }
@@ -159,7 +206,12 @@ class MemberDetailActivity : BaseActivity() {
 
     private fun mata() {
         member = Member(
-            0, "狐彻", 1, Date().time, Date().time, "狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁"
+            0,
+            "狐彻",
+            1,
+            Date().time,
+            Date().time,
+            "狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁狐族万岁"
         )
     }
 
