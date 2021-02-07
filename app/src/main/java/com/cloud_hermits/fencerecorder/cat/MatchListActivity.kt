@@ -11,9 +11,9 @@ import com.binzeefox.foxdevframe_kotlin.ui.utils.NoticeUtil
 import com.binzeefox.foxdevframe_kotlin.ui.utils.launcher.Launcher
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
-import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
+import com.cloud_hermits.common.BaseApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
-import com.cloud_hermits.fencerecorder.db.tables.Match
+import com.cloud_hermits.common.db.tables.Match
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*

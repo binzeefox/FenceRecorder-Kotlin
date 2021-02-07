@@ -96,9 +96,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //Room
-    implementation rootProject.ext.dependencies.room_runtime
-    kapt rootProject.ext.dependencies.room_compiler
+//    //Room
+//    implementation rootProject.ext.dependencies.room_runtime
+//    kapt rootProject.ext.dependencies.room_compiler
 
     //Bugly
     implementation 'com.tencent.bugly:crashreport_upgrade:1.4.5'

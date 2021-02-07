@@ -1,11 +1,11 @@
-package com.cloud_hermits.fencerecorder.db
+package com.cloud_hermits.common.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.cloud_hermits.fencerecorder.db.tables.Match
-import com.cloud_hermits.fencerecorder.db.tables.MatchDao
-import com.cloud_hermits.fencerecorder.db.tables.Member
-import com.cloud_hermits.fencerecorder.db.tables.MemberDao
+import com.cloud_hermits.common.db.tables.Match
+import com.cloud_hermits.common.db.tables.MatchDao
+import com.cloud_hermits.common.db.tables.Member
+import com.cloud_hermits.common.db.tables.MemberDao
 
 /**
  * 数据库

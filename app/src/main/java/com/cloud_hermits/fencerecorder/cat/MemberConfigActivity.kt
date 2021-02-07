@@ -13,9 +13,9 @@ import com.binzeefox.foxdevframe_kotlin.ui.utils.launcher.Launcher
 import com.binzeefox.foxdevframe_kotlin.utils.LogUtil
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
-import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
+import com.cloud_hermits.common.BaseApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
-import com.cloud_hermits.fencerecorder.db.tables.*
+import com.cloud_hermits.common.db.tables.*
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.*

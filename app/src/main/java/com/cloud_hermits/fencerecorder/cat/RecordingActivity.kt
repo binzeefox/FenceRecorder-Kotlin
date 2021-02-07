@@ -18,9 +18,9 @@ import com.binzeefox.foxdevframe_kotlin.FoxCore
 import com.binzeefox.foxdevframe_kotlin.ui.utils.NoticeUtil
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
-import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
+import com.cloud_hermits.common.BaseApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
-import com.cloud_hermits.fencerecorder.db.tables.MatchCondition
+import com.cloud_hermits.common.db.tables.MatchCondition
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -8,12 +8,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.binzeefox.foxdevframe_kotlin.FoxCore
-import com.binzeefox.foxdevframe_kotlin.ui.utils.launcher.Launcher
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
-import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
+import com.cloud_hermits.common.BaseApplication.Companion.database
 import com.cloud_hermits.fencerecorder.R
-import com.cloud_hermits.fencerecorder.db.tables.*
+import com.cloud_hermits.common.db.tables.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

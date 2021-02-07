@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 def _versionCode = rootProject.ext.android.versionCode
@@ -68,7 +69,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // Bugly
-//    api rootProject.ext.dependencies.bugly_crashreport
-//    api rootProject.ext.dependencies.bugly_native_crashreport
+    // Room
+    def room_version = "2.2.6"
+    api "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // gson
+    api 'com.google.code.gson:gson:2.8.6'
 }

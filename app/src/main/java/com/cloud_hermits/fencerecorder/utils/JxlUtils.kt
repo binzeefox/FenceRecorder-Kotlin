@@ -1,8 +1,8 @@
 package com.cloud_hermits.fencerecorder.utils
 
 import com.binzeefox.foxdevframe_kotlin.FoxCore
-import com.cloud_hermits.fencerecorder.MyApplication.Companion.database
-import com.cloud_hermits.fencerecorder.db.tables.*
+import com.cloud_hermits.common.BaseApplication.Companion.database
+import com.cloud_hermits.common.db.tables.*
 import jxl.Workbook
 import jxl.write.Label
 import jxl.write.WritableSheet

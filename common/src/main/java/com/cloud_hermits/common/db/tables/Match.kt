@@ -1,4 +1,4 @@
-package com.cloud_hermits.fencerecorder.db.tables
+package com.cloud_hermits.common.db.tables
 
 import androidx.room.*
 import java.util.*

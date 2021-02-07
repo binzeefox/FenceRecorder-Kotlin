@@ -15,7 +15,7 @@ import com.binzeefox.foxdevframe_kotlin.ui.utils.ViewUtil
 import com.binzeefox.foxdevframe_kotlin.utils.LogUtil
 import com.binzeefox.foxdevframe_kotlin.utils.ThreadUtils
 import com.cloud_hermits.common.BaseActivity
-import com.cloud_hermits.fencerecorder.MyApplication.Companion.clearTables
+import com.cloud_hermits.common.BaseApplication.Companion.clearTables
 import com.cloud_hermits.fencerecorder.R
 import com.cloud_hermits.fencerecorder.utils.JxlUtils
 import com.tencent.bugly.beta.Beta
